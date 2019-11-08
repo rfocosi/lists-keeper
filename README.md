@@ -39,3 +39,9 @@ curl -X POST \
 	]
 }'
 ```
+
+## Access Docker's MongoDB
+
+```
+docker exec -it $( docker ps -f "name=lists-keeper" -f "ancestor=mongo" -q ) mongo -u root -p root
+```
