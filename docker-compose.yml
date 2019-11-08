@@ -1,0 +1,24 @@
+version: '3'
+services:
+  lists-keeper:
+    build: .
+    ports:
+      - "8080:8080"
+    links:
+      - mongo
+    environment:
+      MONGO_USER: keeper
+      MONGO_PWD: keeper
+      MONGO_HOST: mongo
+      MONGO_PORT: 27017
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: item_list
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    volumes:
+      - $HOME/docker_volumes/mongodb:/data/db
+      - ./docker/initdb:/docker-entrypoint-initdb.d
